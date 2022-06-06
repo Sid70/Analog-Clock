@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+
+    <style>
+        #clockcontainer {
+            position: relative;
+            width: 40vw;
+            height: 40vw;
+            width: 440px;
+            height: 440px;
+            margin: auto;
+            background: url("clock.jpg") no-repeat;
+            background-size: 100%;
+        }
+
+        #hour,
+        #miniute,
+        #second {
+            position: absolute;
+            background-color: rgb(107, 40, 40);
+            border-radius: 10px;
+            transform-origin: bottom;
+        }
+
+        #hour {
+            width: 2%;
+            height: 24%;
+            left: 49%;
+            top: 27%;
+        }
+
+        #miniute {
+            width: 1.5%;
+            height: 30%;
+            left: 50%;
+            top: 20%;
+        }
+
+        #second {
+            width: 1%;
+            height: 35%;
+            left: 49.3%;
+            top: 14%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="clockcontainer">
+        <div id="hour"></div>
+        <div id="miniute"></div>
+        <div id="second"></div>
+    </div>
+
+    <script>
+
+        setInterval(() => {
+
+            let date = new Date();
+
+            let h = date.getHours();
+            let m = date.getMinutes();
+            let s = date.getSeconds();
+
+            /* for hour :
+            12 hr = 360 deg
+            1 hr = 30 deg
+            h hr = 30 * h deg
+            +
+            1 hr = 60 min = 30 deg
+            1 min = 30 / 60 deg = 1/2 deg
+            m min = m / 2 deg
+            */
+            h_rotate = (30 * h) + (m / 2);
+
+            /* for miniute: 
+            60 min = 360 deg
+            1 min = 6 deg
+            m min = 6 * m deg
+            */
+            m_rotate = (6 * m);
+
+            s_rotate = (6 * s);
+
+            hour.style.transform = `rotate(${h_rotate}deg)`;
+            miniute.style.transform = `rotate(${m_rotate}deg)`;
+            second.style.transform = `rotate(${s_rotate}deg)`;
+
+        }, 1000);
+
+    </script>
+
+</body>
+
+</html>
